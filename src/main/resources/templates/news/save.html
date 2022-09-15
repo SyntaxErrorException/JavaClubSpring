@@ -1,36 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>お知らせの追加</title>
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <div class="container">
 <h1 class="my-4">お知らせの追加</h1>
-<form action="" method="post">
-	<span class="error">タイトルに関するエラーメッセージ</span>
-	<p class="mt-2">タイトル：<input type="text" name="title"></p>
+<form action="" method="post" th:object="${newsForm}">
+	<span th:errors="*{title}" class="error">タイトルに関するエラーメッセージ</span>
+	<p class="mt-2">タイトル：<input type="text" th:field="*{title}"></p>
 
-	<span class="error">掲載日に関するエラーメッセージ</span>
-	<p class="mt-2">掲載日：<input type="date" name="postDate"></p>
+	<span th:errors="*{postDate}" class="error">掲載日に関するエラーメッセージ</span>
+	<p class="mt-2">掲載日：<input type="date" th:field="*{postDate}"></p>
 
 	<p class="news_target">対象を限定する場合は☑：
-		<label><input type="checkbox" name="targetIdList" value="1"> 通常会員</label>　
-		<label><input type="checkbox" name="targetIdList" value="2"> プレミアム会員</label>　
+		<th:block th:each="type : ${typeList}">
+			<label><input type="checkbox" th:field="*{targetIdList}" value="${type.id}">[[${type.name}]]</label>　
+		</th:block>
 	</p>
 
-	<span class="error">内容に関するエラーメッセージ</span>
+	<span th:errors="*{article}" class="error">内容に関するエラーメッセージ</span>
 	<p class="mt-2">内容：<br>
-	<textarea name="article" cols="40" rows="5"></textarea></p>
+	<textarea th:field="*{article}" cols="40" rows="5"></textarea></p>
 
 	<span class="error">イメージ画像に関するエラーメッセージ</span>
 	<p class="mt-2">イメージ画像：<input type="file" name="upfile"></p>
 
 	<input class="btn btn-primary" type="submit">
 </form>
-<p class="mt-4"><a href="list.html">一覧に戻る</a></p>
+<p class="mt-4"><a th:href="@{/news}">一覧に戻る</a></p>
 </div>
 </body>
 </html>

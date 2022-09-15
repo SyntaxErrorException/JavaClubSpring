@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>お知らせ一覧</title>
-<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
 <div class="container">
 <h1 class="mt-4">お知らせ一覧</h1>
 
 <!-- 操作に応じたメッセージを表示:start -->
-<div class="alert alert-success mt-4">
-	お知らせを追加しました等、操作に応じたメッセージ
+<div th:if="${statusMessage}" class="alert alert-success mt-4">
+	[[${statusMessage}]]
 </div>
 <!-- 操作に応じたメッセージを表示:end -->
 
 <p>
-	<a class="mt-4 btn btn-primary" href="save.html">お知らせの追加</a>
-	<a class="mt-4 ml-4 btn btn-secondary" href="../home.html">ログアウト</a>
+	<a class="mt-4 btn btn-primary" th:href="@{/news/add}">お知らせの追加</a>
+	<a class="mt-4 ml-4 btn btn-secondary" th:href="@{/logout}">ログアウト</a>
 </p>
 <table class="table">
 	<tr>
@@ -27,19 +27,12 @@
 		<th>掲載日</th>
 		<th>操作</th>
 	</tr>
-	<tr>
-		<td>2</td>
-		<td>taro</td>
-		<td>定期メンテナンスのお知らせ</td>
-		<td>2020年05月25日</td>
-		<td><a class="btn btn-primary" href="detail.html">詳細を見る</a></td>
-	</tr>
-	<tr>
-		<td>1</td>
-		<td>taro</td>
-		<td>子どもの日キャンペーン</td>
-		<td>2020年05月01日</td>
-		<td><a class="btn btn-primary" href="detail.html">詳細を見る</a></td>
+	<tr th:each=" n : ${newsList}">
+		<td th:text="${n.id}"></td>
+		<td th:text="${n.author}"></td>
+		<td th:text="${n.title}"></td>
+		<td th:text="${#dates.format(n.postDate, 'yyyy年MM月dd日')}"></td>
+		<td><a class="btn btn-primary" th:href="@{/news/{id}(id=${n.id})}">詳細を見る</a></td>
 	</tr>
 </table>
 </div>
