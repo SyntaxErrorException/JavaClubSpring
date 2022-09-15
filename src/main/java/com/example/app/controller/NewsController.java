@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.NewsForm;
@@ -61,6 +62,15 @@ public class NewsController {
 	@PostMapping("add")
 	public String addPost(
 			HttpSession session, @Valid NewsForm newsForm, Model model, Errors errors, RedirectAttributes ra) throws Exception{
+		//バリデーション
+		MultipartFile upfile = newsForm.getUpfile();
+		if (!upfile.isEmpty()) {
+			String type = upfile.getContentType();
+			if (!type.startsWith("image/")) {
+				errors.rejectValue("upfile", "error.not_image_file");
+			}
+		}
+		
 		if (errors.hasErrors()) {
 			model.addAttribute("typeList", memberService.getMemberTypeList());
 			return "news/save";

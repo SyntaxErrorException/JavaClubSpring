@@ -9,7 +9,7 @@
 <body>
 <div class="container">
 <h1 class="my-4">お知らせの追加</h1>
-<form action="" method="post" th:object="${newsForm}">
+<form action="" method="post" th:object="${newsForm}" enctype="multipart/form-data" id="form">
 	<span th:errors="*{title}" class="error">タイトルに関するエラーメッセージ</span>
 	<p class="mt-2">タイトル：<input type="text" th:field="*{title}"></p>
 
@@ -18,7 +18,7 @@
 
 	<p class="news_target">対象を限定する場合は☑：
 		<th:block th:each="type : ${typeList}">
-			<label><input type="checkbox" th:field="*{targetIdList}" value="${type.id}">[[${type.name}]]</label>　
+			<label><input type="checkbox" th:field="*{targetIdList}" th:value="${type.id}">[[${type.name}]]</label>　
 		</th:block>
 	</p>
 
@@ -26,8 +26,8 @@
 	<p class="mt-2">内容：<br>
 	<textarea th:field="*{article}" cols="40" rows="5"></textarea></p>
 
-	<span class="error">イメージ画像に関するエラーメッセージ</span>
-	<p class="mt-2">イメージ画像：<input type="file" name="upfile"></p>
+	<span th:errors="*{upfile}" class="error">イメージ画像に関するエラーメッセージ</span>
+	<p class="mt-2">イメージ画像：<input type="file" th:field="*{upfile}" id="upfile"></p>
 
 	<input class="btn btn-primary" type="submit">
 </form>

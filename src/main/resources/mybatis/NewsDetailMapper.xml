@@ -5,6 +5,6 @@
 	<select id="insert" resultType="NewsDetail">
 		INSERT INTO 
 		news_details (news_id,article,photo) 
-		VALUES (${newsId},${article},${photo});
+		VALUES (#{newsId},#{article},#{photo});
 	</select>
 </mapper>

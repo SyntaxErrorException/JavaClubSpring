@@ -41,9 +41,9 @@
 		<td>[[${news.detail.article}]]</td>
 	</tr>
 	<!-- イメージ画像がある場合:start -->
-	<tr>
+	<tr th:if="${news.detail.photo}">
 		<th>イメージ画像</th>
-		<td><img src="https://placehold.jp/5dab9f/ffffff/200x200.png?text=Dummy Image" alt=""></td>
+		<td><img th:src="@{/uploads/{img}(img=${news.detail.photo})}" alt=""></td>
 	</tr>
 	<!-- イメージ画像がある場合:end -->
 </table>

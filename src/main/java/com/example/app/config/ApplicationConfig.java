@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.example.app.filter.AuthFilter;
@@ -32,5 +33,12 @@ public class ApplicationConfig implements WebMvcConfigurer {
 	bean.addUrlPatterns("/members/*");
 	bean.addUrlPatterns("/news/*");
 	return bean;
+	}
+	
+	//uploadsフォルダをリソースとして利用可能にする
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/uploads/**").addResourceLocations("file///C:/Users/zd2L20/uploads");
+		
 	}
 }
