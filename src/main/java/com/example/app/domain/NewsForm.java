@@ -1,7 +1,6 @@
 package com.example.app.domain;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
@@ -16,7 +15,7 @@ public class NewsForm {
 	@NotBlank
 	private String title;
 	private String author;
-	private Date postDate = Date.valueOf(LocalDate.now());
+	private Date postDate =  new Date();
 	
 	//NewsDetail
 	@NotBlank

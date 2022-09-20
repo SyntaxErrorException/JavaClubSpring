@@ -34,11 +34,9 @@ public class ApplicationConfig implements WebMvcConfigurer {
 	bean.addUrlPatterns("/news/*");
 	return bean;
 	}
-	
 	//uploadsフォルダをリソースとして利用可能にする
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/uploads/**").addResourceLocations("file///C:/Users/zd2L20/uploads");
-		
+		registry.addResourceHandler("/uploads/**").addResourceLocations("file:///C:/Users/zd2L20/uploads/");
 	}
 }

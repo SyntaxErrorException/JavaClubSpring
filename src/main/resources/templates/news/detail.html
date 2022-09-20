@@ -43,7 +43,7 @@
 	<!-- イメージ画像がある場合:start -->
 	<tr th:if="${news.detail.photo}">
 		<th>イメージ画像</th>
-		<td><img th:src="@{/uploads/{img}(img=${news.detail.photo})}" alt=""></td>
+		<td><img th:src="@{/uploads/{img}(img=${news.detail.photo})}"></td>
 	</tr>
 	<!-- イメージ画像がある場合:end -->
 </table>

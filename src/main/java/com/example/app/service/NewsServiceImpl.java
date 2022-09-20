@@ -51,7 +51,7 @@ public class NewsServiceImpl implements NewsService{
 		if (!upfile.isEmpty()) {
 			String photo = upfile.getOriginalFilename();
 			detail.setPhoto(photo);
-			File dest = new File("C:/Users/zd2L20/uploads" + photo);
+			File dest = new File("C:/Users/zd2L20/uploads/" + photo);
 			upfile.transferTo(dest);
 		}
 		
